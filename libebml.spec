@@ -3,9 +3,9 @@ Summary(pl):	Biblioteka dostêpu rozszerzalnego metajêzyka binarnego
 Name:		libebml
 Version:	0.7.2
 Release:	1
-License:	GPL v2 or QPL
+License:	LGPL v2.1+
 Group:		Libraries
-Source0:	http://dl.matroska.org/downloads/%{name}/%{name}-%{version}.tar.bz2
+Source0:	http://dl.matroska.org/downloads/libebml/%{name}-%{version}.tar.bz2
 # Source0-md5:	d3196c1b89772bcabfffe5717bda33bc
 Patch0:		%{name}-makefile.patch
 URL:		http://www.matroska.org/
