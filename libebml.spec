@@ -1,12 +1,12 @@
 Summary:	Extensible Binary Meta Language access library
 Summary(pl):	Biblioteka dostêpu rozszerzalnego metajêzyka binarnego
 Name:		libebml
-Version:	0.5.0
+Version:	0.5.1
 Release:	1
 License:	GPL v2 or QPL
 Group:		Libraries
-Source0:	http://matroska.free.fr/downloads/libebml/%{name}-%{version}.tar.gz
-# Source0-md5:	8dd008b980234d878b0983880812e561
+Source0:	http://matroska.free.fr/downloads/libebml/%{name}-%{version}.tar.bz2
+# Source0-md5:	81137dc4ba0338d14f08a296b0f5715a
 Patch0:		%{name}-makefile.patch
 URL:		http://www.matroska.org/
 BuildRequires:	libstdc++-devel
@@ -79,7 +79,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-##%doc src/api/index.html
 %attr(755,root,root) %{_libdir}/libebml.so
 %{_libdir}/libebml.la
 %{_includedir}/ebml
