@@ -3,86 +3,69 @@ Summary(pl):	Biblioteka dostêpu rozszerzalnego metajêzyka binarnego
 Name:		libebml
 Version:	0.4.4
 Release:	1
-License:	GPL/QPL
+License:	GPL v2 or QPL
 Group:		Libraries
 Source0:	http://matroska.free.fr/downloads/libebml/%{name}-%{version}.tar.bz2
 # Source0-md5:	0b0cea70bbe04ecdbb3a0e2a603515b8
 Patch0:		%{name}-makefile.patch
 URL:		http://www.matroska.org/
+BuildRequires:	libstdc++-devel
+BuildRequires:	libtool
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-Extensible Binary Meta Language access library
-A library for reading and writing files with the Extensible Binary
-Meta Language, a binary pendant to XML.
+Extensible Binary Meta Language access library is a library for
+reading and writing files with the Extensible Binary Meta Language, a
+binary pendant to XML.
    
 %description -l pl
-Biblioteki rozszerzalnego metajêzyka binarnego umo¿liwiaj±ce czytanie
-i zapisywanie plików w tym metajêzyku, dzia³aj±ca w oparciu o xml.
+Biblioteka rozszerzalnego metajêzyka binarnego (Extensible Binary Meta
+Language, w skrócie EBML) umo¿liwia czytanie i zapisywanie plików w
+tym metajêzyku, bêd±cym binarnym uzupe³nieniem XML.
 
 %package devel
-Summary:	Developmment files and headers for Extensible Binary Meta Language.
-Summary(pl):	Nag³ówki dla rozszerzalnego metajêzyka binarnego.
+Summary:	Header files for Extensible Binary Meta Language library
+Summary(pl):	Nag³ówki biblioteki rozszerzalnego metajêzyka binarnego
 Group:		Development/Libraries
-Requires:       %{name} >= %{version}
+Requires:	%{name} = %{version}
+Requires:	libstdc++-devel
 
 %description devel
-Developmment files and headers for Extensible Binary Meta Language.
+Header files for Extensible Binary Meta Language library.
 
 %description devel -l pl
-Nag³ówki dla rozszerzalnego metajêzyka binarnego.
+Nag³ówki biblioteki rozszerzalnego metajêzyka binarnego.
 
 %package static
-Summary:        Static libraries for Extensible Binary Meta Language.
-Summary(pl):   	Biblioteki statyczne dla rozszerzalnego metajêzyka binarnego.
-Group:          Libraries
+Summary:	Static version of Extensible Binary Meta Language library
+Summary(pl):	Statyczna wersja biblioteki rozszerzalnego metajêzyka binarnego
+Group:		Development/Libraries
+Requires:	%{name}-devel = %{version}
 
 %description static
-Static libraries for Extensible Binary Meta Language.
+Static version of Extensible Binary Meta Language library.
 
 %description static -l pl
-Biblioteki statyczne dla rozszerzalnego metajêzyka binarnego.
+Statyczna wersja biblioteki rozszerzalnego metajêzyka binarnego.
 
 %prep
 %setup -q 
 %patch0 -p1
 
 %build
-cd make/linux
-%{__make} clean
-%{__make} \
+%{__make} -C make/linux \
 	prefix=%{_prefix} \
-	CXX=%{__cxx} \
-	LD=%{__cxx} \
-	AR="%{__ar} rcvu"  \
-	RANLIB=%{__ranlib} \
-	INSTALL=%{__install} \
-	%{?debug:DEBUG=yes} \
-	INSTALL_OPTS="" \
-	INSTALL_OPTS_LIB="" \
-	INSTALL_DIR_OPTS="" \
-	LDFLAGS="-shared"\
-	CXXFLAGS="%{rpmcflags}"  \
-	SRC_DIR=%{_builddir}/%{name}-%{version}/src/
+	CXX="%{__cxx}" \
+	LD="%{__cxx}" \
+	LDFLAGS="%{rpmldflags}"\
+	DEBUGFLAGS="%{rpmcflags} %{?debug:-DDEBUG}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT
 
-%{__make} -f make/linux/Makefile install \
-	prefix=$RPM_BUILD_ROOT%{_prefix} \
-	CXX=%{__cxx} \
-	LD=%{__cxx} \
-	AR="%{__ar} rcvu"  \
-	RANLIB=%{__ranlib} \
-	INSTALL=%{__install} \
-	%{?debug:DEBUG=yes} \
-	INSTALL_OPTS="" \
-	INSTALL_OPTS_LIB="" \
-	INSTALL_DIR_OPTS="" \
-	SRC_DIR=%{_builddir}/%{name}-%{version}/src/\
-	LDFLAGS="-shared" \
-        CXXFLAGS="%{rpmcflags}"
+%{__make} -C make/linux install \
+	DESTDIR=$RPM_BUILD_ROOT \
+	prefix=%{_prefix}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -92,10 +75,13 @@ rm -rf $RPM_BUILD_ROOT
 
 %files 
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libebml.so
+%attr(755,root,root) %{_libdir}/libebml.so.*.*.*
 
 %files devel
 %defattr(644,root,root,755)
+%doc src/api/index.html
+%attr(755,root,root) %{_libdir}/libebml.so
+%{_libdir}/libebml.la
 %{_includedir}/ebml
 
 %files static

@@ -1,38 +1,71 @@
---- libebml-0.4.4/make/linux/Makefile.orig	2003-06-29 17:52:28.000000000 +0200
-+++ libebml-0.4.4/make/linux/Makefile	2003-06-29 17:53:09.000000000 +0200
-@@ -43,7 +43,7 @@
+--- libebml-0.4.4/make/linux/Makefile.orig	2003-06-13 20:54:48.000000000 +0200
++++ libebml-0.4.4/make/linux/Makefile	2003-07-08 22:00:10.000000000 +0200
+@@ -25,6 +25,7 @@
+ INSTALL_OPTS = -m 644
+ INSTALL_OPTS_LIB = -m 644
+ INSTALL_DIR_OPTS = -m 755
++LIBTOOL = libtool
+ 
+ # Options
+ EXTENSION=.cpp
+@@ -43,7 +44,7 @@
  LIBS=
  
  # Names
 -LIBRARY=libebml.a
-+LIBRARY=libebml
++LIBRARY=libebml.la
  
  # source-files
  sources:=$(wildcard ${SRC_DIR}*$(EXTENSION))
-@@ -68,10 +68,10 @@
- 	$(CXX) -c $(CXXFLAGS) $(INCLUDE) -o $@ $<
+@@ -54,8 +55,8 @@
+ # files holding dependency information; replace .cxx extension with .dep
+ dependencies:=$(patsubst %$(EXTENSION),%.dep,$(sources))
+ 
+-# object files; replace .cxx extension with .o
+-objects:=$(patsubst %$(EXTENSION),%.o,$(sources))
++# object files; replace .cxx extension with .lo
++objects:=$(patsubst %$(EXTENSION),%.lo,$(sources))
+ 
+ DEPENDFLAGS  = ${CXXFLAGS} ${INCLUDE}
+ 
+@@ -64,14 +65,12 @@
+ lib library: $(LIBRARY)
+ 
+ # Build rules
+-%.o: %$(EXTENSION)
+-	$(CXX) -c $(CXXFLAGS) $(INCLUDE) -o $@ $<
++%.lo: %$(EXTENSION)
++	$(LIBTOOL) --mode=compile $(CXX) -c $(CXXFLAGS) $(INCLUDE) -o $@ $<
  
  $(LIBRARY): $(objects)
 -	$(AR) $@ $(objects)
 -	$(RANLIB) $@
 -#	$(LD) $(LDFLAGS) -o $@ $^ $(LIBS)
 -#	${LD} -o $@ ${LDFLAGS} ${OBJS} ${LIBS} ${EXTRA_LIBS}
-+	$(AR) $@.a $(objects)
-+	$(RANLIB) $@.a
-+	$(LD) $(LDFLAGS) -o $@.so $^ $(LIBS)
++	$(LIBTOOL) --mode=link $(LD) $(LDFLAGS) -o $@ $^ $(LIBS) -rpath $(libdir)
 +
  
  clean:
  	rm -f $(objects)
---- libebml-0.4.4/make/linux/Makefile~	2003-06-29 18:18:36.000000000 +0200
-+++ libebml-0.4.4/make/linux/Makefile	2003-06-29 18:20:03.000000000 +0200
-@@ -85,7 +85,8 @@
+@@ -84,15 +83,15 @@
+ 	$(DEPEND) $(DEPENDFLAGS) $(sources)
  
  install: $(LIBRARY)
- 	$(INSTALL) $(INSTALL_DIR_OPTS) -d $(libdir)
+-	$(INSTALL) $(INSTALL_DIR_OPTS) -d $(libdir)
 -	$(INSTALL) $(INSTALL_OPTS_LIB) $(LIBRARY) $(libdir)
-+	$(INSTALL) $(INSTALL_OPTS_LIB) $(LIBRARY).so $(libdir)
-+	$(INSTALL) $(INSTALL_OPTS_LIB) $(LIBRARY).a $(libdir)
- 	$(INSTALL) $(INSTALL_DIR_OPTS) -d $(includedir)
+-	$(INSTALL) $(INSTALL_DIR_OPTS) -d $(includedir)
++	$(INSTALL) $(INSTALL_DIR_OPTS) -d $(DESTDIR)$(libdir)
++	$(LIBTOOL) --mode=install $(INSTALL) $(LIBRARY) $(DESTDIR)$(libdir)
++	$(INSTALL) $(INSTALL_DIR_OPTS) -d $(DESTDIR)$(includedir)
  	for i in $(SRC_DIR)/*.h; do \
- 		$(INSTALL) $(INSTALL_OPTS) $$i $(includedir) ; \
+-		$(INSTALL) $(INSTALL_OPTS) $$i $(includedir) ; \
++		$(INSTALL) $(INSTALL_OPTS) $$i $(DESTDIR)$(includedir) ; \
+ 	done
+-	$(INSTALL) $(INSTALL_DIR_OPTS) -d $(includedir)/api/c
++	$(INSTALL) $(INSTALL_DIR_OPTS) -d $(DESTDIR)$(includedir)/api/c
+ 	for i in $(SRC_DIR)/api/c/*.h; do \
+-		$(INSTALL) $(INSTALL_OPTS) $$i $(includedir)/api/c ; \
++		$(INSTALL) $(INSTALL_OPTS) $$i $(DESTDIR)$(includedir)/api/c ; \
+ 	done
+ 
+ # DO NOT DELETE
