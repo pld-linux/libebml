@@ -21,7 +21,7 @@ binary pendant to XML.
 %description -l pl
 Biblioteka rozszerzalnego metajêzyka binarnego (Extensible Binary Meta
 Language, w skrócie EBML) umo¿liwia czytanie i zapisywanie plików w
-tym metajêzyku, bêd±cym binarnym uzupe³nieniem XML.
+tym metajêzyku, bêd±cym binarnym uzupe³nieniem XML-a.
 
 %package devel
 Summary:	Header files for Extensible Binary Meta Language library
