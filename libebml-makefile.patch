@@ -1,0 +1,38 @@
+--- libebml-0.4.4/make/linux/Makefile.orig	2003-06-29 17:52:28.000000000 +0200
++++ libebml-0.4.4/make/linux/Makefile	2003-06-29 17:53:09.000000000 +0200
+@@ -43,7 +43,7 @@
+ LIBS=
+ 
+ # Names
+-LIBRARY=libebml.a
++LIBRARY=libebml
+ 
+ # source-files
+ sources:=$(wildcard ${SRC_DIR}*$(EXTENSION))
+@@ -68,10 +68,10 @@
+ 	$(CXX) -c $(CXXFLAGS) $(INCLUDE) -o $@ $<
+ 
+ $(LIBRARY): $(objects)
+-	$(AR) $@ $(objects)
+-	$(RANLIB) $@
+-#	$(LD) $(LDFLAGS) -o $@ $^ $(LIBS)
+-#	${LD} -o $@ ${LDFLAGS} ${OBJS} ${LIBS} ${EXTRA_LIBS}
++	$(AR) $@.a $(objects)
++	$(RANLIB) $@.a
++	$(LD) $(LDFLAGS) -o $@.so $^ $(LIBS)
++
+ 
+ clean:
+ 	rm -f $(objects)
+--- libebml-0.4.4/make/linux/Makefile~	2003-06-29 18:18:36.000000000 +0200
++++ libebml-0.4.4/make/linux/Makefile	2003-06-29 18:20:03.000000000 +0200
+@@ -85,7 +85,8 @@
+ 
+ install: $(LIBRARY)
+ 	$(INSTALL) $(INSTALL_DIR_OPTS) -d $(libdir)
+-	$(INSTALL) $(INSTALL_OPTS_LIB) $(LIBRARY) $(libdir)
++	$(INSTALL) $(INSTALL_OPTS_LIB) $(LIBRARY).so $(libdir)
++	$(INSTALL) $(INSTALL_OPTS_LIB) $(LIBRARY).a $(libdir)
+ 	$(INSTALL) $(INSTALL_DIR_OPTS) -d $(includedir)
+ 	for i in $(SRC_DIR)/*.h; do \
+ 		$(INSTALL) $(INSTALL_OPTS) $$i $(includedir) ; \
