@@ -17,7 +17,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Extensible Binary Meta Language access library is a library for
 reading and writing files with the Extensible Binary Meta Language, a
 binary pendant to XML.
-   
+
 %description -l pl
 Biblioteka rozszerzalnego metajêzyka binarnego (Extensible Binary Meta
 Language, w skrócie EBML) umo¿liwia czytanie i zapisywanie plików w
@@ -49,7 +49,7 @@ Static version of Extensible Binary Meta Language library.
 Statyczna wersja biblioteki rozszerzalnego metajêzyka binarnego.
 
 %prep
-%setup -q 
+%setup -q
 %patch0 -p1
 
 %build
@@ -73,7 +73,7 @@ rm -rf $RPM_BUILD_ROOT
 %post	-p /sbin/ldconfig
 %postun -p /sbin/ldconfig
 
-%files 
+%files
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libebml.so.*.*.*
 
