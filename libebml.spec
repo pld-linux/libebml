@@ -57,6 +57,7 @@ Statyczna wersja biblioteki rozszerzalnego metajêzyka binarnego.
 	prefix=%{_prefix} \
 	libdir=%{_libdir} \
 	CXX="%{__cxx}" \
+	CXXFLAGS="%{rpmcxxflags}" \
 	LD="%{__cxx}" \
 	LDFLAGS="%{rpmldflags}"\
 	DEBUGFLAGS="%{rpmcflags} %{?debug:-DDEBUG}"
