@@ -2,7 +2,7 @@ Summary:	Extensible Binary Meta Language access library
 Summary(pl):	Biblioteka dostêpu rozszerzalnego metajêzyka binarnego
 Name:		libebml
 Version:	0.6.5
-Release:	1
+Release:	2
 License:	GPL v2 or QPL
 Group:		Libraries
 Source0:	http://matroska.free.fr/downloads/%{name}/%{name}-%{version}.tar.gz
