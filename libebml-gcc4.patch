@@ -1,0 +1,12 @@
+--- libebml-0.7.3/src/EbmlFloat.cpp.orig	2005-01-10 23:49:42.000000000 +0100
++++ libebml-0.7.3/src/EbmlFloat.cpp	2005-02-27 21:40:21.690108936 +0100
+@@ -102,7 +102,8 @@
+ 		if (Size == 4) {
+ 			big_int32 TmpRead;
+ 			TmpRead.Eval(Buffer);
+-			float val = *((float *)&(int32(TmpRead)));
++			int32 tmp32 = int32(TmpRead);
++			float val = *((float*)&tmp32);
+ 			Value = val;
+ 			bValueIsSet = true;
+ 		} else if (Size == 8) {
