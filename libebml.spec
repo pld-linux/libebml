@@ -55,6 +55,7 @@ Statyczna wersja biblioteki rozszerzalnego metajêzyka binarnego.
 %build
 %{__make} -C make/linux \
 	prefix=%{_prefix} \
+	libdir=%{_libdir} \
 	CXX="%{__cxx}" \
 	LD="%{__cxx}" \
 	LDFLAGS="%{rpmldflags}"\
@@ -65,7 +66,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} -C make/linux install \
 	DESTDIR=$RPM_BUILD_ROOT \
-	prefix=%{_prefix}
+	prefix=%{_prefix} \
+	libdir=%{_libdir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
