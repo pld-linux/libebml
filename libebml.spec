@@ -1,12 +1,12 @@
 Summary:	Extensible Binary Meta Language access library
 Summary(pl):	Biblioteka dostêpu rozszerzalnego metajêzyka binarnego
 Name:		libebml
-Version:	0.6.4
+Version:	0.6.5
 Release:	1
 License:	GPL v2 or QPL
 Group:		Libraries
 Source0:	http://matroska.free.fr/downloads/%{name}/%{name}-%{version}.tar.gz
-# Source0-md5:	7ac6fb3f4bcadcd845f0e9446ff446b7
+# Source0-md5:	417d2597e4310458a74e6db32fb13632
 Patch0:		%{name}-makefile.patch
 URL:		http://www.matroska.org/
 BuildRequires:	libstdc++-devel
@@ -27,7 +27,7 @@ tym metajêzyku, bêd±cym binarnym uzupe³nieniem XML-a.
 Summary:	Header files for Extensible Binary Meta Language library
 Summary(pl):	Nag³ówki biblioteki rozszerzalnego metajêzyka binarnego
 Group:		Development/Libraries
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 Requires:	libstdc++-devel
 
 %description devel
@@ -40,7 +40,7 @@ Nag³ówki biblioteki rozszerzalnego metajêzyka binarnego.
 Summary:	Static version of Extensible Binary Meta Language library
 Summary(pl):	Statyczna wersja biblioteki rozszerzalnego metajêzyka binarnego
 Group:		Development/Libraries
-Requires:	%{name}-devel = %{version}
+Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 Static version of Extensible Binary Meta Language library.
