@@ -1,6 +1,6 @@
---- libebml-0.7.2/make/linux/Makefile.orig	2004-07-19 18:39:13.000000000 +0200
-+++ libebml0.7.2/make/linux/Makefile	2004-11-07 13:30:20.287470496 +0100
-@@ -30,6 +30,7 @@
+--- libebml-0.7.4/make/linux/Makefile.orig	2005-04-16 13:19:57.000000000 +0200
++++ libebml-0.7.4/make/linux/Makefile	2005-04-24 01:00:00.947584792 +0200
+@@ -28,6 +28,7 @@
  INSTALL_OPTS = -m 644
  INSTALL_OPTS_LIB = -m 644
  INSTALL_DIR_OPTS = -m 755
@@ -8,51 +8,60 @@
  
  # Options
  EXTENSION=.cpp
-@@ -48,7 +49,7 @@
+@@ -50,9 +51,7 @@
  LIBS=
  
  # Names
 -LIBRARY=libebml.a
+-LIBRARY_SO=libebml.so
+-LIBRARY_SO_VER=libebml.so.0
 +LIBRARY=libebml.la
  
  # source-files
  sources:=$(wildcard ${SRC_DIR}*$(EXTENSION))
-@@ -59,8 +60,8 @@
- # files holding dependency information; replace .cxx extension with .dep
- dependencies:=$(patsubst %$(EXTENSION),%.dep,$(sources))
+@@ -60,9 +59,8 @@
+ # header files; replace .cxx extension with .h
+ headers:=$(patsubst %$(EXTENSION),%.h,$(sources))
  
 -# object files; replace .cxx extension with .o
 -objects:=$(patsubst %$(EXTENSION),%.o,$(sources))
+-objects_so:=$(patsubst %$(EXTENSION),%.lo,$(sources))
 +# object files; replace .cxx extension with .lo
 +objects:=$(patsubst %$(EXTENSION),%.lo,$(sources))
  
  WARNINGFLAGS=-Wall -Wno-unknown-pragmas -ansi -fno-gnu-keywords -Wshadow
  COMPILEFLAGS=$(WARNINGFLAGS) $(CXXFLAGS) $(CPPFLAGS) $(DEBUGFLAGS) $(INCLUDE)
-@@ -71,12 +72,11 @@
- lib library: $(LIBRARY)
+@@ -79,19 +77,11 @@
+ 	@false
  
  # Build rules
 -%.o: %$(EXTENSION)
 -	$(CXX) -c $(COMPILEFLAGS) -o $@ $<
-+%.lo: %$(EXTENSION)
-+	$(LIBTOOL) --mode=compile $(CXX) -c $(CXXFLAGS) $(INCLUDE) -o $@ $<
+-
+ %.lo: %$(EXTENSION)
+-	$(CXX) -c $(COMPILEFLAGS) -fPIC -o $@ $<
++	$(LIBTOOL) --mode=compile $(CXX) -c $(COMPILEFLAGS) -o $@ $<
  
  $(LIBRARY): $(objects)
 -	$(AR) $@ $(objects)
 -	$(RANLIB) $@
+-
+-$(LIBRARY_SO): $(objects_so)
+-	$(CXX) -shared -Wl,-soname,$(LIBRARY_SO_VER) -o $(LIBRARY_SO_VER) $(objects_so)
+-	ln -s $(LIBRARY_SO_VER) $(LIBRARY_SO)
 +	$(LIBTOOL) --mode=link $(LD) $(LDFLAGS) -o $@ $^ $(LIBS) -rpath $(libdir)
  
  clean:
- 	rm -f $(objects)
-@@ -89,15 +89,15 @@
- 	$(DEPEND) $(DEPENDFLAGS) $(sources)
+ 	rm -f $(objects) $(objects_so)
+@@ -113,26 +103,21 @@
+ 		$(CXX) $(DEPENDFLAGS) -MM -MT $$o $$i >> .depend ; \
+ 	done
  
- install: $(LIBRARY)
--	$(INSTALL) $(INSTALL_DIR_OPTS) -d $(libdir)
--	$(INSTALL) $(INSTALL_OPTS_LIB) $(LIBRARY) $(libdir)
+-install: install_staticlib install_sharedlib install_headers
++install: install_lib install_headers
+ 
+ install_headers:
 -	$(INSTALL) $(INSTALL_DIR_OPTS) -d $(includedir)
-+	$(INSTALL) $(INSTALL_DIR_OPTS) -d $(DESTDIR)$(libdir)
-+	$(LIBTOOL) --mode=install $(INSTALL) $(LIBRARY) $(DESTDIR)$(libdir)
 +	$(INSTALL) $(INSTALL_DIR_OPTS) -d $(DESTDIR)$(includedir)
  	for i in $(INCLUDE_DIR)/*.h; do \
 -		$(INSTALL) $(INSTALL_OPTS) $$i $(includedir) ; \
@@ -65,4 +74,17 @@
 +		$(INSTALL) $(INSTALL_OPTS) $$i $(DESTDIR)$(includedir)/c ; \
  	done
  
- # DO NOT DELETE
+-install_staticlib: $(LIBRARY)
+-	$(INSTALL) $(INSTALL_DIR_OPTS) -d $(libdir)
+-	$(INSTALL) $(INSTALL_OPTS_LIB) $(LIBRARY) $(libdir)
+-
+-install_sharedlib: $(LIBRARY_SO)
+-	$(INSTALL) $(INSTALL_OPTS_LIB) $(LIBRARY_SO_VER) $(libdir)
+-	ln -s $(LIBRARY_SO_VER) $(libdir)/$(LIBRARY_SO)
+-
++install_lib: $(LIBRARY)
++	$(INSTALL) $(INSTALL_DIR_OPTS) -d $(DESTDIR)$(libdir)
++	$(LIBTOOL) --mode=install $(INSTALL) $(LIBRARY) $(DESTDIR)$(libdir)
+ 
+ ifneq ($(wildcard .depend),)
+ include .depend
