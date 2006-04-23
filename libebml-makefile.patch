@@ -1,5 +1,5 @@
---- libebml-0.7.5/make/linux/Makefile.orig	2005-04-19 08:56:06.000000000 +0200
-+++ libebml-0.7.5/make/linux/Makefile	2005-06-12 20:47:04.374324344 +0200
+--- libebml-0.7.7/make/linux/Makefile.orig	2006-03-30 21:05:11.000000000 +0200
++++ libebml-0.7.7/make/linux/Makefile	2006-04-23 18:35:31.025168000 +0200
 @@ -28,6 +28,7 @@
  INSTALL_OPTS = -m 644
  INSTALL_OPTS_LIB = -m 644
@@ -31,7 +31,7 @@
  
  WARNINGFLAGS=-Wall -Wno-unknown-pragmas -ansi -fno-gnu-keywords -Wshadow
  COMPILEFLAGS=$(WARNINGFLAGS) $(CXXFLAGS) $(CPPFLAGS) $(DEBUGFLAGS) $(INCLUDE)
-@@ -83,19 +81,11 @@
+@@ -83,20 +81,11 @@
  	@false
  
  # Build rules
@@ -48,12 +48,13 @@
 -
 -$(LIBRARY_SO): $(objects_so)
 -	$(CXX) -shared -Wl,-soname,$(LIBRARY_SO_VER) -o $(LIBRARY_SO_VER) $(objects_so)
+-	rm -f $(LIBRARY_SO)
 -	ln -s $(LIBRARY_SO_VER) $(LIBRARY_SO)
 +	$(LIBTOOL) --mode=link $(LD) $(LDFLAGS) -o $@ $^ $(LIBS) -rpath $(libdir)
  
  clean:
  	rm -f $(objects) $(objects_so)
-@@ -120,26 +110,22 @@
+@@ -121,27 +110,22 @@
  ifeq (Darwin,$(shell uname -s))
  install: install_staticlib install_headers
  else
@@ -80,6 +81,7 @@
 -	$(INSTALL) $(INSTALL_OPTS_LIB) $(LIBRARY) $(libdir)
 -
 -install_sharedlib: $(LIBRARY_SO)
+-	$(INSTALL) $(INSTALL_DIR_OPTS) -d $(libdir)
 -	$(INSTALL) $(INSTALL_OPTS_LIB) $(LIBRARY_SO_VER) $(libdir)
 -	ln -s $(LIBRARY_SO_VER) $(libdir)/$(LIBRARY_SO)
 +install_lib: $(LIBRARY)
