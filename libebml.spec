@@ -1,5 +1,5 @@
 Summary:	Extensible Binary Meta Language access library
-Summary(pl):	Biblioteka dost阷u rozszerzalnego metaj陑yka binarnego
+Summary(pl.UTF-8):   Biblioteka dost臋pu rozszerzalnego metaj臋zyka binarnego
 Name:		libebml
 Version:	0.7.7
 Release:	1
@@ -18,14 +18,14 @@ Extensible Binary Meta Language access library is a library for
 reading and writing files with the Extensible Binary Meta Language, a
 binary pendant to XML.
 
-%description -l pl
-Biblioteka rozszerzalnego metaj陑yka binarnego (Extensible Binary Meta
-Language, w skr骳ie EBML) umo縧iwia czytanie i zapisywanie plik體 w
-tym metaj陑yku, b阣眂ym binarnym uzupe硁ieniem XML-a.
+%description -l pl.UTF-8
+Biblioteka rozszerzalnego metaj臋zyka binarnego (Extensible Binary Meta
+Language, w skr贸cie EBML) umo偶liwia czytanie i zapisywanie plik贸w w
+tym metaj臋zyku, b臋d膮cym binarnym uzupe艂nieniem XML-a.
 
 %package devel
 Summary:	Header files for Extensible Binary Meta Language library
-Summary(pl):	Nag丑wki biblioteki rozszerzalnego metaj陑yka binarnego
+Summary(pl.UTF-8):   Nag艂贸wki biblioteki rozszerzalnego metaj臋zyka binarnego
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	libstdc++-devel
@@ -33,20 +33,20 @@ Requires:	libstdc++-devel
 %description devel
 Header files for Extensible Binary Meta Language library.
 
-%description devel -l pl
-Nag丑wki biblioteki rozszerzalnego metaj陑yka binarnego.
+%description devel -l pl.UTF-8
+Nag艂贸wki biblioteki rozszerzalnego metaj臋zyka binarnego.
 
 %package static
 Summary:	Static version of Extensible Binary Meta Language library
-Summary(pl):	Statyczna wersja biblioteki rozszerzalnego metaj陑yka binarnego
+Summary(pl.UTF-8):   Statyczna wersja biblioteki rozszerzalnego metaj臋zyka binarnego
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 Static version of Extensible Binary Meta Language library.
 
-%description static -l pl
-Statyczna wersja biblioteki rozszerzalnego metaj陑yka binarnego.
+%description static -l pl.UTF-8
+Statyczna wersja biblioteki rozszerzalnego metaj臋zyka binarnego.
 
 %prep
 %setup -q
