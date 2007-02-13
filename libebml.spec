@@ -1,5 +1,5 @@
 Summary:	Extensible Binary Meta Language access library
-Summary(pl.UTF-8):   Biblioteka dostępu rozszerzalnego metajęzyka binarnego
+Summary(pl.UTF-8):	Biblioteka dostępu rozszerzalnego metajęzyka binarnego
 Name:		libebml
 Version:	0.7.7
 Release:	1
@@ -25,7 +25,7 @@ tym metajęzyku, będącym binarnym uzupełnieniem XML-a.
 
 %package devel
 Summary:	Header files for Extensible Binary Meta Language library
-Summary(pl.UTF-8):   Nagłówki biblioteki rozszerzalnego metajęzyka binarnego
+Summary(pl.UTF-8):	Nagłówki biblioteki rozszerzalnego metajęzyka binarnego
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	libstdc++-devel
@@ -38,7 +38,7 @@ Nagłówki biblioteki rozszerzalnego metajęzyka binarnego.
 
 %package static
 Summary:	Static version of Extensible Binary Meta Language library
-Summary(pl.UTF-8):   Statyczna wersja biblioteki rozszerzalnego metajęzyka binarnego
+Summary(pl.UTF-8):	Statyczna wersja biblioteki rozszerzalnego metajęzyka binarnego
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
