@@ -1,5 +1,5 @@
---- libebml-0.7.7/make/linux/Makefile.orig	2006-03-30 21:05:11.000000000 +0200
-+++ libebml-0.7.7/make/linux/Makefile	2006-04-23 18:35:31.025168000 +0200
+--- libebml-0.7.8/make/linux/Makefile.orig	2006-06-02 16:32:15.000000000 +0200
++++ libebml-0.7.8/make/linux/Makefile	2008-07-13 21:37:16.422034707 +0200
 @@ -28,6 +28,7 @@
  INSTALL_OPTS = -m 644
  INSTALL_OPTS_LIB = -m 644
@@ -83,7 +83,7 @@
 -install_sharedlib: $(LIBRARY_SO)
 -	$(INSTALL) $(INSTALL_DIR_OPTS) -d $(libdir)
 -	$(INSTALL) $(INSTALL_OPTS_LIB) $(LIBRARY_SO_VER) $(libdir)
--	ln -s $(LIBRARY_SO_VER) $(libdir)/$(LIBRARY_SO)
+-	ln -fs $(LIBRARY_SO_VER) $(libdir)/$(LIBRARY_SO)
 +install_lib: $(LIBRARY)
 +	$(INSTALL) $(INSTALL_DIR_OPTS) -d $(DESTDIR)$(libdir)
 +	$(LIBTOOL) --mode=install $(INSTALL) $(INSTALL_OPTS_LIB) $(LIBRARY) $(DESTDIR)$(libdir)
