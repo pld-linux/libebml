@@ -1,5 +1,5 @@
---- libebml-0.7.8/make/linux/Makefile.orig	2006-06-02 16:32:15.000000000 +0200
-+++ libebml-0.7.8/make/linux/Makefile	2008-07-13 21:37:16.422034707 +0200
+--- libebml-0.7.8/make/linux/Makefile	2008-07-13 21:37:16.422034707 +0200
++++ libebml-0.7.8/make/linux/Makefile	2010-08-05 22:54:21.405342023 +0300
 @@ -28,6 +28,7 @@
  INSTALL_OPTS = -m 644
  INSTALL_OPTS_LIB = -m 644
@@ -40,7 +40,7 @@
 -
  %.lo: %$(EXTENSION)
 -	$(CXX) -c $(COMPILEFLAGS) -fPIC -o $@ $<
-+	$(LIBTOOL) --mode=compile $(CXX) -c $(COMPILEFLAGS) -o $@ $<
++	$(LIBTOOL) --mode=compile --tag=CC $(CXX) -c $(COMPILEFLAGS) -o $@ $<
  
  $(LIBRARY): $(objects)
 -	$(AR) $@ $(objects)
@@ -50,7 +50,7 @@
 -	$(CXX) -shared -Wl,-soname,$(LIBRARY_SO_VER) -o $(LIBRARY_SO_VER) $(objects_so)
 -	rm -f $(LIBRARY_SO)
 -	ln -s $(LIBRARY_SO_VER) $(LIBRARY_SO)
-+	$(LIBTOOL) --mode=link $(LD) $(LDFLAGS) -o $@ $^ $(LIBS) -rpath $(libdir)
++	$(LIBTOOL) --mode=link --tag=CC $(LD) $(LDFLAGS) -o $@ $^ $(LIBS) -rpath $(libdir)
  
  clean:
  	rm -f $(objects) $(objects_so)

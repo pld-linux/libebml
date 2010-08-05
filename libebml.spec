@@ -8,7 +8,6 @@ Group:		Libraries
 Source0:	http://dl.matroska.org/downloads/libebml/%{name}-%{version}.tar.bz2
 # Source0-md5:	6278109f52e4f9d2c8a8dfc0d668b587
 Patch0:		%{name}-makefile.patch
-Patch1:		libtool-tag.patch
 URL:		http://www.matroska.org/
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
@@ -52,7 +51,6 @@ Statyczna wersja biblioteki rozszerzalnego metajęzyka binarnego.
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1
 
 %build
 %{__make} -C make/linux \
