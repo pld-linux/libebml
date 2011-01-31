@@ -14,7 +14,7 @@
  # Names
 -LIBRARY=libebml.a
 -LIBRARY_SO=libebml.so
--LIBRARY_SO_VER=libebml.so.2
+-LIBRARY_SO_VER=libebml.so.3
 +LIBRARY=libebml.la
  
  # source-files
@@ -50,7 +50,7 @@
 -	$(CXX) -shared -Wl,-soname,$(LIBRARY_SO_VER) -o $(LIBRARY_SO_VER) $(objects_so)
 -	rm -f $(LIBRARY_SO)
 -	ln -s $(LIBRARY_SO_VER) $(LIBRARY_SO)
-+	$(LIBTOOL) --mode=link --tag=CC $(LD) $(LDFLAGS) -version-info 2:0:0 -o $@ $^ $(LIBS) -rpath $(libdir)
++	$(LIBTOOL) --mode=link --tag=CC $(LD) $(LDFLAGS) -version-info 3:0:0 -o $@ $^ $(LIBS) -rpath $(libdir)
  
  clean:
  	rm -f $(objects) $(objects_so)
