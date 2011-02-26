@@ -40,7 +40,7 @@
 -
  %.lo: %$(EXTENSION)
 -	$(CXX) -c $(COMPILEFLAGS) -fPIC -o $@ $<
-+	$(LIBTOOL) --mode=compile --tag=CC $(CXX) -c $(COMPILEFLAGS) -o $@ $<
++	$(LIBTOOL) --mode=compile --tag=CXX $(CXX) -c $(COMPILEFLAGS) -o $@ $<
  
  $(LIBRARY): $(objects)
 -	$(AR) rcvu $@ $(objects)
@@ -50,7 +50,7 @@
 -	$(CXX) -shared -Wl,-soname,$(LIBRARY_SO_VER) -o $(LIBRARY_SO_VER) $(objects_so)
 -	rm -f $(LIBRARY_SO)
 -	ln -s $(LIBRARY_SO_VER) $(LIBRARY_SO)
-+	$(LIBTOOL) --mode=link --tag=CC $(LD) $(LDFLAGS) -version-info 3:0:0 -o $@ $^ $(LIBS) -rpath $(libdir)
++	$(LIBTOOL) --mode=link --tag=CXX $(LD) $(LDFLAGS) -version-info 3:0:0 -o $@ $^ $(LIBS) -rpath $(libdir)
  
  clean:
  	rm -f $(objects) $(objects_so)
@@ -90,3 +90,4 @@
  
  
  ifneq ($(wildcard .depend),)
+
