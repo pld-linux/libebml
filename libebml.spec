@@ -1,12 +1,12 @@
 Summary:	Extensible Binary Meta Language access library
 Summary(pl.UTF-8):	Biblioteka dostępu rozszerzalnego metajęzyka binarnego
 Name:		libebml
-Version:	1.2.1
+Version:	1.2.2
 Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
 Source0:	http://dl.matroska.org/downloads/libebml/%{name}-%{version}.tar.bz2
-# Source0-md5:	13c5a10e260e703d3a7f003fdc995183
+# Source0-md5:	726cc2bd1a525929ff35ff9854c0ebab
 Patch0:		%{name}-makefile.patch
 URL:		http://www.matroska.org/
 BuildRequires:	libstdc++-devel
