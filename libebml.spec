@@ -1,16 +1,14 @@
 Summary:	Extensible Binary Meta Language access library
 Summary(pl.UTF-8):	Biblioteka dostępu rozszerzalnego metajęzyka binarnego
 Name:		libebml
-Version:	1.3.0
+Version:	1.3.1
 Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
 Source0:	http://dl.matroska.org/downloads/libebml/%{name}-%{version}.tar.bz2
-# Source0-md5:	efec729bf5a51e649e1d9d1f61c0ae7a
-Patch0:		%{name}-makefile.patch
+# Source0-md5:	2d5a0e502fabedfded2a890c6b5513a5
 URL:		http://www.matroska.org/
 BuildRequires:	libstdc++-devel
-BuildRequires:	libtool
 BuildRequires:	rpmbuild(macros) >= 1.553
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -51,26 +49,17 @@ Statyczna wersja biblioteki rozszerzalnego metajęzyka binarnego.
 
 %prep
 %setup -q
-%undos make/linux/Makefile
-%patch0 -p1
 
 %build
-%{__make} -C make/linux \
-	prefix=%{_prefix} \
-	libdir=%{_libdir} \
-	CXX="%{__cxx}" \
-	CXXFLAGS="%{rpmcxxflags}" \
-	LD="%{__cxx}" \
-	LDFLAGS="%{rpmldflags}"\
-	DEBUGFLAGS="%{rpmcflags} %{?debug:-DDEBUG}"
+%configure
+
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__make} -C make/linux install \
-	DESTDIR=$RPM_BUILD_ROOT \
-	prefix=%{_prefix} \
-	libdir=%{_libdir}
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -89,6 +78,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libebml.so
 %{_libdir}/libebml.la
 %{_includedir}/ebml
+%{_pkgconfigdir}/libebml.pc
 
 %files static
 %defattr(644,root,root,755)
