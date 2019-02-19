@@ -14,7 +14,7 @@ Source0:	https://dl.matroska.org/downloads/libebml/%{name}-%{version}.tar.xz
 URL:		https://www.matroska.org/
 BuildRequires:	cmake >= 3.1.2
 BuildRequires:	libstdc++-devel
-BuildRequires:	rpmbuild(macros) >= 1.553
+BuildRequires:	rpmbuild(macros) >= 1.605
 BuildRequires:	xz
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -65,6 +65,7 @@ cd build-static
 	-DBUILD_SHARED_LIBS:BOOL=OFF \
 	-DCMAKE_INSTALL_INCLUDEDIR=include \
 	-DCMAKE_INSTALL_LIBDIR=%{_lib}
+
 %{__make}
 cd ..
 %endif
