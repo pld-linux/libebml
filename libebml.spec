@@ -5,15 +5,15 @@
 Summary:	Extensible Binary Meta Language access library
 Summary(pl.UTF-8):	Biblioteka dostępu rozszerzalnego metajęzyka binarnego
 Name:		libebml
-Version:	1.3.10
+Version:	1.4.0
 Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
 Source0:	https://dl.matroska.org/downloads/libebml/%{name}-%{version}.tar.xz
-# Source0-md5:	71edd78f05a7136c9bbed89f010bbef0
+# Source0-md5:	98cd1a1c553608f9d3d35092242cd46b
 URL:		https://www.matroska.org/
 BuildRequires:	cmake >= 3.1.2
-BuildRequires:	libstdc++-devel
+BuildRequires:	libstdc++-devel >= 6:4.7
 BuildRequires:	rpmbuild(macros) >= 1.605
 BuildRequires:	xz
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -33,7 +33,7 @@ Summary:	Header files for Extensible Binary Meta Language library
 Summary(pl.UTF-8):	Nagłówki biblioteki rozszerzalnego metajęzyka binarnego
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	libstdc++-devel
+Requires:	libstdc++-devel >= 6:4.7
 
 %description devel
 Header files for Extensible Binary Meta Language library.
@@ -99,7 +99,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc ChangeLog README.md
 %attr(755,root,root) %{_libdir}/libebml.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libebml.so.4
+%attr(755,root,root) %ghost %{_libdir}/libebml.so.5
 
 %files devel
 %defattr(644,root,root,755)
