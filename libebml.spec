@@ -15,6 +15,7 @@ URL:		https://www.matroska.org/
 BuildRequires:	cmake >= 3.1.2
 BuildRequires:	libstdc++-devel >= 6:4.7
 BuildRequires:	rpmbuild(macros) >= 1.605
+BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
