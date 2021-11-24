@@ -1,0 +1,22 @@
+diff -up libebml-1.4.2/src/EbmlString.cpp.gcc11 libebml-1.4.2/src/EbmlString.cpp
+--- libebml-1.4.2/src/EbmlString.cpp.gcc11	2021-02-18 12:42:59.000000000 +0100
++++ libebml-1.4.2/src/EbmlString.cpp	2021-03-01 11:42:02.122854703 +0100
+@@ -34,6 +34,7 @@
+   \author Steve Lhomme     <robux4 @ users.sf.net>
+ */
+ #include <cassert>
++#include <limits>
+ 
+ #include "ebml/EbmlString.h"
+ 
+diff -up libebml-1.4.2/src/EbmlUnicodeString.cpp.gcc11 libebml-1.4.2/src/EbmlUnicodeString.cpp
+--- libebml-1.4.2/src/EbmlUnicodeString.cpp.gcc11	2021-03-01 11:42:02.121854696 +0100
++++ libebml-1.4.2/src/EbmlUnicodeString.cpp	2021-03-01 11:42:21.772995170 +0100
+@@ -36,6 +36,7 @@
+ */
+ 
+ #include <cassert>
++#include <limits>
+ 
+ #include "ebml/EbmlUnicodeString.h"
+ 
