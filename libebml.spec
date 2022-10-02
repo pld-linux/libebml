@@ -5,15 +5,15 @@
 Summary:	Extensible Binary Meta Language access library
 Summary(pl.UTF-8):	Biblioteka dostępu rozszerzalnego metajęzyka binarnego
 Name:		libebml
-Version:	1.4.2
-Release:	3
+Version:	1.4.3
+Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
 Source0:	https://dl.matroska.org/downloads/libebml/%{name}-%{version}.tar.xz
-# Source0-md5:	194095f4315334fcedacb4900c59c014
-Patch0:		gcc11.patch
+# Source0-md5:	de037ddb4908f92866e7ce76869ddba1
 URL:		https://www.matroska.org/
 BuildRequires:	cmake >= 3.1.2
+BuildRequires:	gcc >= 6:5
 BuildRequires:	libstdc++-devel >= 6:4.7
 BuildRequires:	rpmbuild(macros) >= 1.605
 BuildRequires:	tar >= 1:1.22
@@ -57,7 +57,6 @@ Statyczna wersja biblioteki rozszerzalnego metajęzyka binarnego.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 # .pc file generation expects relative CMAKE_INSTALL_{INCLUDE,LIB}DIR
@@ -100,7 +99,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc ChangeLog README.md
+%doc NEWS.md README.md
 %attr(755,root,root) %{_libdir}/libebml.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libebml.so.5
 
