@@ -13,8 +13,7 @@ Source0:	https://dl.matroska.org/downloads/libebml/%{name}-%{version}.tar.xz
 # Source0-md5:	de037ddb4908f92866e7ce76869ddba1
 URL:		https://www.matroska.org/
 BuildRequires:	cmake >= 3.1.2
-BuildRequires:	gcc >= 6:5
-BuildRequires:	libstdc++-devel >= 6:4.7
+BuildRequires:	libstdc++-devel >= 6:5
 BuildRequires:	rpmbuild(macros) >= 1.605
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
